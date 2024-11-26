@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button, Form, Modal, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/company/company_draft_write_work.module.css';
 import style_purc from '../../styles/company/company_draft_write_purc.module.css';
+import style_atten from '../../styles/company/company_draft_write_atten.module.css';
 import ApprovalLine from '../layout/ApprovalLine';
+import useFetchData from '../../componentFetch/useFetchData';
 
 const CompanyUserDraftWriteWork = () => {
   const [reportTitle, setReportTitle] = useState('');
   const [reporter, setReporter] = useState('');
-  const [reportDate, setReportDate] = useState('');
+  const [reportDate, setReportDate] = useState(() => {});
   const [department, setDepartment] = useState('');
   const [reportContent, setReportContent] = useState('');
 
@@ -25,6 +27,8 @@ const CompanyUserDraftWriteWork = () => {
   const [formErrors, setFormErrors] = useState({});
   
   const navigate = useNavigate();
+  const token = localStorage.getItem('jwt');
+  const userData = useFetchData(token);
 
   // 빈 행 생성 함수
   function createEmptyRow() {
@@ -37,6 +41,16 @@ const CompanyUserDraftWriteWork = () => {
       note: ''
     };
   }
+
+  useEffect(() => {
+    setReportDate(new Date().toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    }));
+  }, []);
 
   // 제품 리스트의 각 행의 값이 변경될 때 호출되는 함수
   const handleRowChange = (index, field, value) => {
@@ -169,30 +183,26 @@ const CompanyUserDraftWriteWork = () => {
         {/* 문서 정보 */}
         <div className={styles.docHeader}>
           <Table bordered size="sm" className={styles.docInfo}>
-            <tbody>
+          <tbody>
               <tr>
-                <th className={styles.docKey}>문서번호</th>
+                <th className={`${styles.docKey} ${style_atten.docKey}`}>문서번호</th>
                 <td className={styles.docValue}>-</td>
               </tr>
               <tr>
-                <td className={styles.docKey}>본&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;부</td>
-                <td className={styles.docValue}>{department || 'Mark'}</td>
+                <td className={styles.docKey}>부 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 서</td>
+                <td className={styles.docValue}>{userData?.dept_name}</td>
               </tr>
               <tr>
-                <td className={styles.docKey}>부&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;서</td>
-                <td className={styles.docValue}>{reporter || 'Jacob'}</td>
+                <td className={styles.docKey}>소 &nbsp;속 &nbsp;팀</td>
+                <td className={styles.docValue}>{userData?.dept_team_name || ''}</td>
               </tr>
               <tr>
-                <td className={styles.docKey}>기안일</td>
-                <td className={styles.docValue}>{reportDate || '2024-10-16(수)'}</td>
+                <td className={styles.docKey}>기 &nbsp;안 &nbsp;일</td>
+                <td className={styles.docValue}>{reportDate}</td>
               </tr>
               <tr>
-                <td className={styles.docKey}>기안자</td>
-                <td className={styles.docValue}>배수지</td>
-              </tr>
-              <tr>
-                <td className={styles.docKey}>구매일자</td>
-                <td className={styles.docValue}>2024-10-19(금)</td>
+                <td className={styles.docKey}>기 &nbsp;안 &nbsp;자</td>
+                <td className={styles.docValue}>{userData?.emp_name}</td>
               </tr>
               <tr>
                 <td className={styles.docKey}>결재 상태</td>
@@ -200,21 +210,21 @@ const CompanyUserDraftWriteWork = () => {
               </tr>
             </tbody>
           </Table>
-          <Table bordered size="sm" className={styles.apprLineBox}>
+          <Table bordered size="sm" className={`${styles.apprLineBox} ${style_atten.apprLineBox}`}>
             <tbody className={styles.apprLineTbody}>
               <tr className={styles.apprLinedocTr}>
                 <td className={styles.docKey}>상신</td>
                 <td className={styles.docKey}>결재</td>
               </tr>
               <tr>
-                <td className={styles.docKey}>배수지</td>
+                <td>{userData?.emp_name}</td>
                 <td>
                   <Button className={styles.apprLineBtn} onClick={handleApprLineModal}>결재선</Button>
                 </td>
               </tr>
               <tr>
-                <td className={styles.docValue_date}>2024/10/21</td>
-                <td>-</td>
+                <td className={styles.docValue_date}></td>
+                <td></td>
               </tr>
             </tbody>
           </Table>
