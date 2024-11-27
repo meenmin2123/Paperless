@@ -10,60 +10,25 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons';
-const reportData = [
-    {
-        id: 1,
-        title: "프로젝트 계획서",
-        writer: "배수지",
-        created_at: "2024-10-17",
-        approval_status: "승인 대기",
-    },
-    {
-        id: 2,
-        title: "예산 보고서",
-        writer: "배수지",
-        created_at: "2024-10-16",
-        approval_status: "승인 완료",
-    },
-    {
-        id: 3,
-        title: "업무 진행 상황 보고",
-        writer: "배수지",
-        created_at: "2024-10-14",
-        approval_status: "반려",
-    },
-    {
-        id: 4,
-        title: "연구 개발 계획서",
-        writer: "배수지",
-        created_at: "2024-10-14",
-        approval_status: "승인 완료",
-    },
-    {
-        id: 5,
-        title: "회계 감사 보고서",
-        writer: "배수지",
-        created_at: "2024-10-10",
-        approval_status: "반려",
-    },
-];
-
-
 
 function CompanyUserMain() {
+    const token = localStorage.getItem('jwt');
+    const navigate = useNavigate();
+
     const [mailboxData, setMailboxData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    const token = localStorage.getItem('jwt');
-    const navigate = useNavigate();
     const [todoList, setTodoList] = useState('');
     const [todoContent, setTodoContent] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const inputRef = useRef(null);
+
+    const [reportData, setReportData] = useState([]);
     const [persschedules, setPersschedules] = useState('');
     const [deptschedules, setDeptschedules] = useState('');
     const [teamschedules, setTeamschedules] = useState('');
     const userData = useSelector((state) => state.user.data);
+
     useEffect(() => {
         const fetchEmails = async () => {
             try {
@@ -102,6 +67,36 @@ function CompanyUserMain() {
 
         fetchEmails();
     }, [token]);
+
+    // 문서 목록 가져오기 - API 호출
+    useEffect(() => {
+        const fetchdocRequest = async () => {
+            try {
+                const token = localStorage.getItem('jwt'); // 토큰 가져오기
+                if (!token) {
+                    console.error("토큰이 없습니다.");
+                    return;
+                }
+                const response = await axios.get('http://localhost:8080/api/getreportlistlimit', {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+
+                const data = response.data;
+                console.log("문서 목록 (원본):", data);
+
+                // Map 형식의 데이터를 배열로 변환
+                const dataArray = Object.values(data);
+                setReportData(dataArray); // 배열로 변환 후 상태 업데이트
+                console.log("문서 목록 (배열):", dataArray);
+            } catch (error) {
+                console.error('호출이 실패 했습니다:', error);
+            }
+        };
+
+        fetchdocRequest();
+    }, []);
 
     useEffect(() => {
         const fetchTodoList = async () => {
@@ -267,6 +262,17 @@ function CompanyUserMain() {
     console.log(persschedules);
     console.log(teamschedules);
     console.log(deptschedules);
+
+    // 보고서 결재 상태
+    const statusMap = {
+        'submitted': '상신',
+        'approved': '승인',
+        'pending': '결재 대기',
+        'canceled': '상신 취소',
+        'saved': '임시 저장',
+        'rejected': '반려'
+    };
+
     return (
         <div className="container-xl conbox1">
             <Menubar />
@@ -317,7 +323,7 @@ function CompanyUserMain() {
 
                             {/* 최근 작성 보고서 섹션 */}
                             <div className={`${styles.gridItem} ${styles.gridItemApproval}`}>
-                                <h3 className={styles.colTitle}>최근 작성 보고서</h3>
+                                <h3 className={styles.colTitle}>최근 보고서</h3>
                                 {/* <hr className={styles.titleBorderBar} /> */}
                                 <table className={styles.table}>
                                     <thead className={styles.tablehead}>
@@ -330,15 +336,21 @@ function CompanyUserMain() {
                                         </tr>
                                     </thead>
                                     <tbody className={styles.tablebody}>
-                                        {reportData.map((report) => (
-                                            <tr key={report.id}>
-                                                <td>{report.id}</td>
-                                                <td>{report.title}</td>
-                                                <td>{report.writer}</td>
-                                                <td>{report.created_at}</td>
-                                                <td>{report.approval_status}</td>
+                                        {reportData.length > 0 ? (
+                                            reportData.map((report, index) => (
+                                                <tr key={index}>
+                                                    <td>{index+1}</td>
+                                                    <td>{report.reportTitle}</td>
+                                                    <td>{report.emp_name}</td>
+                                                    <td>{report.submission_date}</td>
+                                                    <td>{statusMap[report.reportStatus] || '알 수 없음'}</td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="5">문서가 없습니다.</td>
                                             </tr>
-                                        ))}
+                                        )}
                                     </tbody>
                                 </table>
                             </div>

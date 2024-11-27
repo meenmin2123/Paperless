@@ -235,6 +235,22 @@ public class ReportController {
         return reportsMap;
     }
 
+
+    @GetMapping("/getreportlistlimit")
+    public Map<Long, ReportDTO> getReportListLimit() {
+        String empCode = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        EmployeeDTO userInfo = reportService.getUserInfo(empCode);
+        Long dept_no = userInfo.getEmp_dept_no();
+        Long emp_no = userInfo.getEmp_no();
+
+        Map<Long, ReportDTO> reportsMap = reportService.selectReportListLimit(dept_no, emp_no);
+        System.out.println("PendingDoc ReportsMap : " + reportsMap);
+
+        return reportsMap;
+    }
+
+
     // 내 문서함 목록
     @GetMapping("/getmydoclist")
     public Map<Long, ReportDTO> getMyDocList() {

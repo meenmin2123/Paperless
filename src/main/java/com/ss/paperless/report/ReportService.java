@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ReportService {
@@ -699,5 +700,32 @@ public class ReportService {
     }
 
 
+    public Map<Long, ReportDTO> selectReportListLimit(Long deptNo, Long empNo) {
+        // 변수 넘기기
+        Map<String, Object> param = new HashMap<>();
+        param.put("deptNo", deptNo);
+        param.put("empNo", empNo);
 
+        // 리스트 저장할 map
+        List<ReportDTO> allReports = new ArrayList<>();
+
+        // 모든 보고서를 리스트에 추가
+        allReports.addAll(reportMapper.selectPendingDocWorkReports(param));
+        allReports.addAll(reportMapper.selectPendingDocAttenReports(param));
+        allReports.addAll(reportMapper.selectPendingDocPurcReports(param));
+
+        // 최신순으로 정렬 (작성일자가 최신일수록 앞에 오게 정렬)
+        allReports.sort((r1, r2) -> r2.getRepo_date().compareTo(r1.getRepo_date()));
+
+        // 최신순으로 5개만 선택
+        List<ReportDTO> limitedReports = allReports.stream()
+                .limit(5)
+                .collect(Collectors.toList());
+
+        // 리스트 저장할 map
+        Map<Long, ReportDTO> reportsMap = new HashMap<>();
+        limitedReports.forEach(report -> reportsMap.put((long) report.getRepo_no(), report));
+
+        return reportsMap;
+    }
 }

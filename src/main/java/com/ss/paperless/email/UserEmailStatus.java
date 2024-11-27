@@ -4,6 +4,8 @@ import com.ss.paperless.employee.entity.EmployeeEntity;
 import lombok.*;
 
 import javax.persistence.*;
+
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity

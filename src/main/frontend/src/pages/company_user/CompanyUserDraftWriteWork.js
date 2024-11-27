@@ -74,7 +74,7 @@ const CompanyUserDraftWriteWork = () => {
         setReportId(result.reportId);
       }
 
-      setAlertMessage(`임시 저장되었습니다.<br/>현재 날짜: ${currentDate}`);
+      setAlertMessage(`임시 저장되었습니다. 현재 날짜: ${currentDate}`);
       setShowAlert(true);
     } catch (error) {
       console.error("Error saving draft:", error);
