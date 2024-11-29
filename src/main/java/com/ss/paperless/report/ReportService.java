@@ -113,9 +113,7 @@ public class ReportService {
 
         // 순차적으로 appr_status 값을 설정
         for (int i = 0; i < approvers.size(); i++) {
-
             String approvalType = approvers.get(i).getApprovalType(); // approvalType 필드 값 추출
-
             Map<String, Object> params = new HashMap<>();
             params.put("reportId" , reportId);
             params.put("emp_no" , approvers.get(i).getEmp_no());
@@ -133,7 +131,6 @@ public class ReportService {
             } else {
                 params.put("appr_status" , "waiting");
             }
-
             // 결재자 데이터 추가
             reportMapper.AddApproversData(params);
         }
@@ -292,7 +289,6 @@ public class ReportService {
         // 업데이트한 문서 다시 조회
         ReportDTO getReport = reportMapper.selectReportFormById(reportId);
         System.out.println("getReport : " + getReport);
-
     }
 //    public void submitReportForApproval(Map<String, Object> reportData, Map<String, List<EmployeeDTO>> selectData) {
 //        try {
@@ -531,7 +527,6 @@ public class ReportService {
     public boolean approveReport(Long reportId, String empCode) {
 
         // 결재자 정보 조회
-//        Integer repoEmpNo = reportMapper.getReportEmpNo(reportId);
         EmployeeDTO empDto = reportMapper.findByEmpCode(empCode);
         Long repoEmpNo = empDto.getEmp_no();
 
@@ -541,7 +536,6 @@ public class ReportService {
         if(apprInfo == null || apprInfo.isEmpty()) {
             return false;
         }
-//        System.out.println("apprInfo : " + apprInfo);
 
         // 결재자 수 확인
         int apprCount = reportMapper.getSelectApproverCount(reportId);

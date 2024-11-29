@@ -5,15 +5,9 @@ import axios from 'axios';
 const useFetchData = (token) => {
   const [userData, setUserData] = useState(null);
 
-  console.log("useFetchData 실행!!!");
-  console.log("useFetchData 실행!!! token : " + token);
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (token) {
-
-        console.log("useFetchData if문 실행!!!");
-
         try {
           const response = await axios.get('/api/infolist', {
             headers: { Authorization: `${token}` }
