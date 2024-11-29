@@ -148,40 +148,32 @@ const CompanyUserDraftWriteAtten = () => {
 
   // 날짜 변경 시 휴가 일수 업데이트
   const handleDateChange = (e, dateType) => {
-    const value = e.target.value; // 입력된 날짜 값
-    const selectedDate = new Date(value); // Date 객체로 변환
-  
-    // 시작일 처리
+    const value = e.target.value;
+
     if (dateType === 'start') {
       setStartDate(value);
-  
-      // 종료일보다 이후의 날짜를 선택한 경우 오류 처리
-      if (endDate && selectedDate > new Date(endDate)) {
-        setErrorMessage('시작일은 종료일보다 이전이어야 합니다.');
-        setEndDate(''); // 종료일 초기화
+      if (endDate && new Date(value) > new Date(endDate)) {
+        setErrorMessage('다시 선택해주세요.');
+        setEndDate('');
       } else {
-        setErrorMessage(''); // 오류 메시지 초기화
+        setErrorMessage('');
       }
-    } 
-  
-    // 종료일 처리
-    else if (dateType === 'end') {
-      // 종료일이 시작일보다 빠른 경우
-      if (selectedDate < new Date(startDate)) {
+    } else if (dateType === 'end') {
+      // 유효성 검사
+      if (new Date(value) < new Date(startDate)) {
         setErrorMessage('종료일은 시작일 이후여야 합니다.');
       } else {
         setEndDate(value);
-        setErrorMessage(''); // 오류 메시지 초기화
+        setErrorMessage('');
       }
     }
   };
-  
+
   // 시작일과 종료일이 모두 있을 때만 휴가 일수 계산
   useEffect(() => {
-    // 시작일과 종료일이 모두 설정되어 있는 경우에만 계산 수행
     if (startDate && endDate) {
       const calculatedDays = calculateLeaveDays(startDate, endDate, vacationType);
-      setAnnualLeaveDays(calculatedDays); // 연차 일수 상태 업데이트
+      setAnnualLeaveDays(calculatedDays);
     }
   }, [startDate, endDate, vacationType]);
 

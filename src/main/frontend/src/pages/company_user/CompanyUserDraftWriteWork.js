@@ -81,6 +81,7 @@ const CompanyUserDraftWriteWork = () => {
       setAlertMessage("임시 저장에 실패했습니다.");
       setShowAlert(true);
     }
+
     setTimeout(() => setShowAlert(false), 60000);
   };
 
@@ -125,6 +126,7 @@ const CompanyUserDraftWriteWork = () => {
   }
 };
 
+  
   // 디버그용
   console.log("====== CompanyUserDraftWriteWork ======");
   console.log("reportId :", reportId);
