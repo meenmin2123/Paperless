@@ -1,11 +1,15 @@
 <h1>Paperless</h1>
+<hr />
+<p>Spring Boot + React + AWS 활용한 전자결재 워크플로우 시스템</p>
 
-<h4>⚙프로젝트 환경 설정</h4>
+<h4>⌚개발 기간</h4>
+<hr />
 <ul>
-  <li><b>Font :</b> 원스토어 모바일고딕 본문체</li>
+  <li>24.09.25 ~ 24.11.11</li>
 </ul>
 
 <h4>👨‍👦‍👦역할 분담</h4>
+<hr />
 <ol>
   <li> <b> ming </b>
     <br>📝 전자 결재 기능 및 화면 구현
@@ -27,7 +31,51 @@
   </li>
 </ol>
 
+<h4>🖥️개발 환경</h4>
+<hr />
+  <ul>
+      <li>Java 11</li>
+      <li>JDK: 11.0.0.1</li>
+      <li>Framework: Spring Boot 2.7.6, Spring MVC</li>
+      <li>ORM: JPA, MyBatis</li>
+      <li>보안: Spring Security (Core, Web, Config), JWT</li>
+      <li>AOP: Spring Boot AOP</li>
+      <li>배포: Spring Boot Maven Plugin</li>
+      <li>기타 라이브러리: AWS SDK (DynamoDB, S3, API Gateway Management API), dotenv</li>
+      <li>Database: MySQL</li>
+  </ul>
+
+  <h5>프론트엔드</h5>
+  <hr />
+    <ul>
+        <li>언어 및 기술: React, JavaScript, CSS</li>
+        <li>라이브러리: Axios (API 통신), Bootstrap (UI 프레임워크)</li>
+    </ul>
+
+  <h5>클라우드</h5>
+  <hr />
+    <ul>
+        <li>플랫폼: AWS</li>
+        <li>서비스: EC2, S3, DynamoDB</li>
+    </ul>
+
+  <h5>주요 도구</h5>
+  <hr />
+    <ul>
+        <li>개발 도구: IntelliJ IDEA, Visual Studio Code</li>
+        <li>빌드 도구: Maven</li>
+        <li>테스트 도구: Postman</li>
+        <li>형상 관리: Git, GitHub</li>
+    </ul>
+    
+<h4>⚙프로젝트 환경 설정</h4>
+<hr />
+<ul>
+  <li><b>Font :</b> 원스토어 모바일고딕 본문체</li>
+</ul>
+
 <h4>🎮사용 API 목록</h4>
+<hr />
 <ol>
   <li>ckeditor5</li>
   <li>FullCalendar</li>
@@ -35,5 +83,7 @@
   <li>네이버 윅스 이메일 인증 api</li>
   <li>AWS - lambda, DynamoDB, WebSocket API,REST API, S3</li>
 </ol>
+
+<h4>주요 기능</h4>
 
 
