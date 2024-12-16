@@ -41,19 +41,19 @@
       <li>Database: MySQL</li>
   </ul>
 
-  <h1>프론트엔드</h1>
+  <h3>프론트엔드</h3>
     <ul>
         <li>언어 및 기술: React, JavaScript, CSS</li>
         <li>라이브러리: Axios (API 통신), Bootstrap (UI 프레임워크)</li>
     </ul>
 
-  <h1>클라우드</h1>
+  <h3>클라우드</h3>
     <ul>
         <li>플랫폼: AWS</li>
         <li>서비스: EC2, S3, DynamoDB</li>
     </ul>
 
-  <h1>주요 도구</h1>
+  <h3>주요 도구</h3>
     <ul>
         <li>개발 도구: IntelliJ IDEA, Visual Studio Code</li>
         <li>빌드 도구: Maven</li>
@@ -61,14 +61,12 @@
         <li>형상 관리: Git, GitHub</li>
     </ul>
     
-<h1>⚙프로젝트 환경 설정</h1>
-<hr />
-<ul>
-  <li><b>Font :</b> 원스토어 모바일고딕 본문체</li>
-</ul>
+  <h3>⚙프로젝트 환경 설정</h3>
+  <ul>
+    <li><b>Font :</b> 원스토어 모바일고딕 본문체</li>
+  </ul>
 
-<h1>🎮사용 API 목록</h1>
-<hr />
+<h3>🎮사용 API 목록</h3>
 <ol>
   <li>ckeditor5</li>
   <li>FullCalendar</li>
