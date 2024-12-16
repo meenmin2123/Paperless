@@ -2,13 +2,11 @@
 <p>Spring Boot + React + AWS 활용한 전자결재 워크플로우 시스템</p>
 
 <h1>⌚개발 기간</h1>
-<hr />
 <ul>
   <li>24.09.25 ~ 24.11.11</li>
 </ul>
 
-<h2>👨‍👦‍👦역할 분담</h2>
-<hr />
+<h1>👨‍👦‍👦역할 분담</h1>
 <ol>
   <li> <b> ming </b>
     <br>📝 전자 결재 기능 및 화면 구현
@@ -30,8 +28,7 @@
   </li>
 </ol>
 
-<h4>🖥️개발 환경</h4>
-<hr />
+<h1>🖥️개발 환경</h1>
   <ul>
       <li>Java 11</li>
       <li>JDK: 11.0.0.1</li>
@@ -44,22 +41,19 @@
       <li>Database: MySQL</li>
   </ul>
 
-  <h5>프론트엔드</h5>
-  <hr />
+  <h1>프론트엔드</h1>
     <ul>
         <li>언어 및 기술: React, JavaScript, CSS</li>
         <li>라이브러리: Axios (API 통신), Bootstrap (UI 프레임워크)</li>
     </ul>
 
-  <h5>클라우드</h5>
-  <hr />
+  <h1>클라우드</h1>
     <ul>
         <li>플랫폼: AWS</li>
         <li>서비스: EC2, S3, DynamoDB</li>
     </ul>
 
-  <h5>주요 도구</h5>
-  <hr />
+  <h1>주요 도구</h1>
     <ul>
         <li>개발 도구: IntelliJ IDEA, Visual Studio Code</li>
         <li>빌드 도구: Maven</li>
@@ -67,13 +61,13 @@
         <li>형상 관리: Git, GitHub</li>
     </ul>
     
-<h4>⚙프로젝트 환경 설정</h4>
+<h1>⚙프로젝트 환경 설정</h1>
 <hr />
 <ul>
   <li><b>Font :</b> 원스토어 모바일고딕 본문체</li>
 </ul>
 
-<h4>🎮사용 API 목록</h4>
+<h1>🎮사용 API 목록</h1>
 <hr />
 <ol>
   <li>ckeditor5</li>
@@ -83,6 +77,6 @@
   <li>AWS - lambda, DynamoDB, WebSocket API,REST API, S3</li>
 </ol>
 
-<h4>주요 기능</h4>
+<h1>💼주요 기능</h1>
 
 
